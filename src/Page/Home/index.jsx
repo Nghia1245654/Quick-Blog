@@ -98,7 +98,7 @@ export default function Home() {
                     {post.title}
                   </h5>
                   <p className="text-foreground mb-2 text-xs text-ellipsis line-clamp-3">
-                    {decodeHtml(stripHtmlTags(post.content))}...
+                    {stripHtmlTags(decodeHtml(post.content))}...
                   </p>
                 </div>
               </div>
