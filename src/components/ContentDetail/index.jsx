@@ -1,27 +1,25 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-
-export default function BlogDetail() {
+import { fetchDetailBlog } from "@/services/api/blog";
+import { Spinner } from "@/components/ui/spinner";
+export default function ContentDetail() {
     // lấy id từ param route
     const [id, setId] = useState(useParams().id);
     const [detailBlog, setDetailBlog] = useState(null);
 
-    useEffect(() => {
-      if (!id) return;
-      fetch(`${import.meta.env.VITE_URL_KEY}/api/posts/${id}`)
-        .then((res) => {
-          if (!res.ok) throw new Error("Failed to fetch post");
-          return res.json();
-        })
-        .then((data) => {
-          console.log(data); // xem cấu trúc dữ liệu
-          setDetailBlog(data);
-        })
-        .catch((err) => {
-          console.error("Error fetching post:", err);
-        });
-    }, [id]);
+     useEffect(() => {
+        if (!id) return;
+     fetchDetailBlog(id)
+       .then((res) => {
+         console.log("Response:", res.data);
+         setDetailBlog(res.data);        
+       })
+       .catch((err) => {
+         console.error("Error fetching detail blog:", err);
+       });
+   }, []);
+
 
   function decodeHtml(html) {
   const txt = document.createElement("textarea");
@@ -60,13 +58,16 @@ function stripHtmlTags(html) {
               />
             </div>
             <div
-              className="blog-details rich-text max-w-3xl mx-auto px-4 text-left text-foreground"
-            >
+              className="blog-details rich-text max-w-3xl mx-auto px-4 text-left text-foreground">
               {stripHtmlTags(decodeHtml(detailBlog.content))}
             </div>
           </div>
         ) : (
-          <p>Loading...</p>
+            
+            <div className="flex justify-center items-center min-h-[50vh]">
+              <Spinner className="w-8 h-8 " />
+            </div>
+        
         )}
       </div>
     </div>

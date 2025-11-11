@@ -1,13 +1,15 @@
 import React from 'react'
-import Login from "@/Page/Login"
-import Registration from "@/Page/registration"
+import Login from "@/pages/Login"
+import Registration from "@/pages/registration"
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Home from './Page/Home'
-import BlogDetail from './Page/BlogDetail'
+import Home from './pages/Home'
+import BlogDetail from './pages/BlogDetail'
 import Layout from './components/Layout'
+import { Toaster } from "react-hot-toast";
 const App = () => {
   return (
     <BrowserRouter>
+        <Toaster position="top-right" />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
