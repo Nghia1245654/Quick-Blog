@@ -3,52 +3,11 @@ import ListBlog from "@/components/ListBlog";
 import { useState, useEffect } from "react";
 import { fetchListBlog } from "@/services/api/blog";
 import Lottie from "lottie-react";
-import LoadingSkeleton from "../Loadingskeleton";
 import loadingFiles from "@/assets/loading_files.json";
-export default function HeroSection({}) {
-  const [loading, setLoading] = useState(true);
-  const [listBlog, setListBlog] = useState([]);
-  const [filteredList, setFilteredList] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [noResults, setNoResults] = useState(false);
-
-  // Lấy danh sách blog ban đầu
-  useEffect(() => {
-    setLoading(true);
-    fetchListBlog()
-      .then((res) => {
-        console.log("Response:", res.data);
-        const items = res?.data?.items || [];
-        setListBlog(items);
-        setFilteredList(items); // ban đầu hiển thị toàn bộ
-      })
-      .catch((err) => {
-        console.error("Error fetching list blog:", err);
-        setListBlog([]);
-        setFilteredList([]);
-      })
-      .finally(() => setLoading(false));
-  }, []);
-
-  // Xử lý khi nhấn nút Search
-  const handleSearch = (e) => {
-    e.preventDefault();
-    //nếu ô search trống thì hiển thị toàn bộ blog
-    if (!searchTerm.trim()) {
-      setFilteredList(listBlog);
-      setNoResults(false);
-      return;
-    }
-    const result = listBlog.filter((post) =>
-      post.title?.toLowerCase().includes(searchTerm.trim().toLowerCase())
-    );
-     setNoResults(result.length === 0);
-    setFilteredList(result);
-    console.log("Result:", result);
-  };
-
+export default function HeroSection({searchTerm, setSearchTerm, handleSearch, noResults}) {
+  
   return (
-    <div className="grid gap-6 px-5 mx-auto max-w-7xl my-20 min-h-[60vh]">
+    <div className="grid gap-6 px-5 mx-auto max-w-7xl mt-20 min-h-[60vh]">
       {/* Hero section */}
       <div>
         <div className="text-center mt-10 mb-8">
@@ -85,25 +44,7 @@ export default function HeroSection({}) {
             </button>
           </form>
         </div>
-        {noResults ? (
-          <div className="flex flex-col items-center justify-center ">
-            <div>
-              <Lottie animationData={loadingFiles} loop={true} />
-            </div>
-            <h1 className="text-center text-gray-500 text-xl font-medium mb-1">
-              We cound not find any blog
-            </h1>
-            <p className="text-center text-gray-500 text-xs">
-              Please try again with a different search query.
-            </p>
-          </div>
-        ) : (
-          <ListBlog
-            listBlog={listBlog}
-            loading={loading}
-            filteredList={filteredList}
-          />
-        )}
+        
       </div>
     </div>
   );

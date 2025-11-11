@@ -1,6 +1,6 @@
 import React from 'react'
 import Login from "@/pages/Login"
-import Registration from "@/pages/registration"
+import Registration from "@/pages/Registration"
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import BlogDetail from './pages/BlogDetail'
