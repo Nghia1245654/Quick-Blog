@@ -1,17 +1,15 @@
 import React from "react";
 import ListBlog from "@/components/ListBlog";
 import { useState, useEffect } from "react";
-import { fetchListBlog } from "@/services/api/blog";
-import Lottie from "lottie-react";
-import loadingFiles from "@/assets/loading_files.json";
-export default function HeroSection({searchTerm, setSearchTerm, handleSearch, noResults}) {
-  
+export default function HeroSection({searchTerm,setSearchTerm,handleSearch}) {
+
+
+
   return (
-    <div className="grid gap-6 px-5 mx-auto max-w-7xl mt-20 min-h-[60vh]">
+    <div className="grid gap-6 px-5 mx-auto max-w-7xl mt-20 min-h-[50vh]">
       {/* Hero section */}
-      <div>
-        <div className="text-center mt-10 mb-8">
-          <h1 className="hero-title text-3xl sm:text-6xl font-semibold sm:leading-[4rem] text-gray-700">
+    <div className="text-center mt-10 mb-8">
+          <h1 className="hero-title text-3xl sm:text-6xl font-semibold sm:leading-16 text-gray-700">
             Your own <span className="text-primary">blogging</span>
             <br />
             platform.
@@ -44,8 +42,6 @@ export default function HeroSection({searchTerm, setSearchTerm, handleSearch, no
             </button>
           </form>
         </div>
-        
-      </div>
     </div>
   );
 }

@@ -11,32 +11,37 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import logo from "@/assets/logo-lGLL0Zb0.png";
-import { Link } from "react-router-dom";
-import { loginUser } from "@/services/api/user";
-import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useState, useContext } from "react";
 import { Spinner } from "@/components/ui/spinner";
 import { toast } from "react-hot-toast";
+import AuthContext from "@/contexts/AuthContext";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [Loading, setLoading] = useState(false);
-  const handlelogin = async (e) => {
+  const { loginUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handlelogin = async () => {
+    if (!email || !password) {
+      toast.error("Please fill in all fields");
+      return;
+    }
     try {
-      if (!email || !password) {
-        toast.error("Please fill in all fields");
-        return;
-      }
       setLoading(true);
-      const response = await loginUser({ email, password });
-      console.log(response);
+      await loginUser(email, password);
       toast.success("Login successful");
+      // khi thành công thì chuyển trang về Home (SPA navigation)
+      navigate("/", { replace: true });
     } catch (error) {
+      console.log(error);
       toast.error(error.response?.data?.message || "Login failed");
-      console.error(error);
     } finally {
       setLoading(false);
     }
   };
+
   return (
     <div className="h-screen flex items-center justify-center bg-[linear-gradient(90deg,rgba(2,0,36,1)_0%,#5044e5_35%,rgba(0,212,255,1)_100%)]">
       <Card className="text-card-foreground flex flex-col gap-6 border shadow-sm bg-white p-8 rounded-md max-w-3xl mx-auto h-fit absolute">

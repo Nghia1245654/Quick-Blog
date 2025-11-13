@@ -84,9 +84,9 @@ export default function Registration() {
 
             <p className="mt-4 text-center text-sm text-gray-500">
               Already have an account? 
-              <a href="/login" className="text-sm text-primary ">
+              <Link href="/login" className="text-sm text-primary ">
                 Login
-              </a>
+              </Link>
             </p>
             </div>
       </Card>

@@ -1,10 +1,10 @@
 import React from "react";
 import logo from "@/assets/logo-lGLL0Zb0.png";
 import { useState, useEffect } from "react";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 import AuthMenu from "@/components/AuthMenu";
 
-function Header() {
+function Header({ role }) {
   const [Themes, setThemes] = useState(
     localStorage.getItem("theme") || "light"
   );
@@ -35,6 +35,7 @@ function Header() {
         </Link>
 
         <div className="flex justify-end items-center gap-2">
+          
           <Link
             to="/Login"
             data-discover="true"
@@ -64,7 +65,7 @@ function Header() {
             </svg>
             Create Blog
           </Link>
-
+      
           <button
             onClick={toggleTheme}
             data-slot="button"

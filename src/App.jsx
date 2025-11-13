@@ -6,9 +6,11 @@ import Home from './pages/Home'
 import BlogDetail from './pages/BlogDetail'
 import Layout from './components/Layout'
 import { Toaster } from "react-hot-toast";
+import { AuthContextProvider } from "@/contexts/authContext";
 const App = () => {
   return (
     <BrowserRouter>
+        <AuthContextProvider>
         <Toaster position="top-right" />
       <Routes>
         <Route path="/" element={<Layout />}>
@@ -18,6 +20,7 @@ const App = () => {
           <Route path="login" element={<Login />} />
           <Route path="registration" element={<Registration />} />
       </Routes>
+      </AuthContextProvider>
     </BrowserRouter>
   )
 }
