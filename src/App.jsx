@@ -18,7 +18,7 @@ const App = () => {
           <Route path="blog/:id" element={<BlogDetail />} />
         </Route>
           <Route path="login" element={<Login />} />
-          <Route path="registration" element={<Registration />} />
+          <Route path="Registration" element={<Registration />} />
       </Routes>
       </AuthContextProvider>
     </BrowserRouter>
