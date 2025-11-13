@@ -1,12 +1,6 @@
 import { Button } from "@/components/ui/button";
 import {
   Card,
-  CardAction,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -15,7 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
 import { Spinner } from "@/components/ui/spinner";
 import { toast } from "react-hot-toast";
-import AuthContext from "@/contexts/AuthContext";
+import AuthContext from "@/contexts/authContext";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -87,9 +81,9 @@ export default function Login() {
 
           <p className="mt-4 text-center text-sm text-gray-500">
             Don't have an account?{" "}
-            <a href="/SignUp" className="text-sm text-primary ">
+            <Link to="/SignUp" className="text-sm text-primary ">
               Signup
-            </a>
+            </Link>
           </p>
         </div>
       </Card>

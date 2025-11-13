@@ -20,7 +20,6 @@ const App = () => {
           <Route path="login" element={<Login />} />
             <Route path="SignUp" element={<SignUp />} />
             {/* compatibility route: some links or bookmarks may use /registration */}
-            <Route path="registration" element={<SignUp />} />
       </Routes>
       </AuthContextProvider>
     </BrowserRouter>
