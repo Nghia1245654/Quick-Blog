@@ -1,12 +1,12 @@
 import React from 'react'
 import Login from "@/pages/Login"
-import Registration from './pages/Registration'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import BlogDetail from './pages/BlogDetail'
 import Layout from './components/Layout'
 import { Toaster } from "react-hot-toast";
 import { AuthContextProvider } from "@/contexts/authContext";
+import Registration from '@/pages/Registration'
 const App = () => {
   return (
     <BrowserRouter>
