@@ -87,7 +87,7 @@ export default function Login() {
 
           <p className="mt-4 text-center text-sm text-gray-500">
             Don't have an account?{" "}
-            <a href="/registration" className="text-sm text-primary ">
+            <a href="/SignUp" className="text-sm text-primary ">
               Signup
             </a>
           </p>

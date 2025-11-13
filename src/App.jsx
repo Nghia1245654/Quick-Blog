@@ -6,7 +6,7 @@ import BlogDetail from './pages/BlogDetail'
 import Layout from './components/Layout'
 import { Toaster } from "react-hot-toast";
 import { AuthContextProvider } from "@/contexts/authContext";
-import Registration from '@/pages/Registration'
+import SignUp from '@/pages/SignUp'
 const App = () => {
   return (
     <BrowserRouter>
@@ -18,7 +18,9 @@ const App = () => {
           <Route path="blog/:id" element={<BlogDetail />} />
         </Route>
           <Route path="login" element={<Login />} />
-          <Route path="Registration" element={<Registration />} />
+            <Route path="SignUp" element={<SignUp />} />
+            {/* compatibility route: some links or bookmarks may use /registration */}
+            <Route path="registration" element={<SignUp />} />
       </Routes>
       </AuthContextProvider>
     </BrowserRouter>

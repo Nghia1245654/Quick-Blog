@@ -151,7 +151,7 @@ export default function AuthMenu({  }) {
                   </div>
                   <div>
                     <Link
-                      to="/registration"
+                      to="/SignUp"
                       className="group flex items-center gap-2 cursor-pointer hover:bg-[#5044e5] hover:text-white rounded py-1.5 px-1.5 "
                     >
                       <svg

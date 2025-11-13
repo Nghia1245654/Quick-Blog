@@ -14,25 +14,25 @@ import logo from "@/assets/logo-lGLL0Zb0.png"
 import { Link } from 'react-router-dom'
 import { toast } from "react-hot-toast";
 import {useState} from 'react'
-import { registrationUser } from "@/services/api/user";
+import { signUpUser } from "@/services/api/user";
 import { Spinner } from "@/components/ui/spinner"
-export default function Registration() {
+export default function SignUp() {
     const [email, setEmail] = useState("");
     const [username,setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [Loading, setLoading] = useState(false);
-  const handleRegistration = async (e) => {
+  const handleSignUp = async (e) => {
     try {
       if (!email || !password || !username) {
         toast.error("Please fill in all fields");
         return;
       }
       setLoading(true);
-      const response = await registrationUser({ email, password,username });
+      const response = await signUpUser({ email, password,username });
       console.log(response);
-      toast.success("Registration successful");
+      toast.success("Sign Up successful");
     } catch (error) {
-      toast.error(error.response?.data?.message || "Registration failed");
+      toast.error(error.response?.data?.message || "Sign Up failed");
       console.error(error);
     } finally {
       setLoading(false);
@@ -76,7 +76,7 @@ export default function Registration() {
 
             <Button
             disabled={Loading}
-              onClick={handleRegistration}
+              onClick={handleSignUp}
               type="submit"
               className="  inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-primary hover:bg-primary/90 h-9 px-4 py-2 has-[>svg]:px-3 w-full text-white c"
             > {Loading ? <div className="flex items-center justify-center gap-2"> <Spinner /> Signing Up </div> : "Sign Up"}
@@ -84,7 +84,7 @@ export default function Registration() {
 
             <p className="mt-4 text-center text-sm text-gray-500">
               Already have an account? 
-              <Link href="/login" className="text-sm text-primary ">
+              <Link to="/login" className="text-sm text-primary ">
                 Login
               </Link>
             </p>
