@@ -38,8 +38,9 @@ export const AuthContextProvider = ({ children }) => {
         // 1. Thông tin cơ bản sau login
         const basicUser = res.data;
         // 2. Lấy thêm thông tin user từ API getMe
-        const userRes = await getme({ token: basicUser.token });
-        let fullUser = basicUser;
+        localStorage.setItem("userInfo", JSON.stringify(basicUser));
+          let fullUser = basicUser;
+          const userRes = await getme({ token: basicUser.token });
         if (userRes.status === 200) {
           fullUser = { ...basicUser, ...userRes.data.user };
         }
