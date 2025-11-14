@@ -15,25 +15,32 @@ import { Link } from 'react-router-dom'
 import { toast } from "react-hot-toast";
 import {useState} from 'react'
 import { signUpUser } from "@/services/api/user";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import AuthContext from "@/contexts/authContext";
 import { Spinner } from "@/components/ui/spinner"
 export default function SignUp() {
     const [email, setEmail] = useState("");
     const [username,setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [Loading, setLoading] = useState(false);
-  const handleSignUp = async (e) => {
+  const navigate = useNavigate();
+ const { registerUser } = useContext(AuthContext);
+  const handleSignUp = async () => {
+    if (!email || !password || !username) {
+      toast.error("Please fill in all fields");
+      return;
+    }
     try {
-      if (!email || !password || !username) {
-        toast.error("Please fill in all fields");
-        return;
-      }
       setLoading(true);
-      const response = await signUpUser({ email, password,username });
-      console.log(response);
+      await registerUser(email, username, password);
       toast.success("Sign Up successful");
+      navigate("/login", { replace: true });
+
+      
     } catch (error) {
+      console.log(error);
       toast.error(error.response?.data?.message || "Sign Up failed");
-      console.error(error);
     } finally {
       setLoading(false);
     }

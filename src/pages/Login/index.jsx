@@ -26,8 +26,8 @@ export default function Login() {
       setLoading(true);
       await loginUser(email, password);
       toast.success("Login successful");
-      // khi thành công thì chuyển trang về Home (SPA navigation)
       navigate("/", { replace: true });
+      
     } catch (error) {
       console.log(error);
       toast.error(error.response?.data?.message || "Login failed");

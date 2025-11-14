@@ -7,6 +7,9 @@ import Layout from './components/Layout'
 import { Toaster } from "react-hot-toast";
 import { AuthContextProvider } from "@/contexts/authContext";
 import SignUp from '@/pages/SignUp'
+import CreateBlog from '@/pages/CreateBlog'
+import MyPostTable from '@/pages/MyPost'
+import UserManagement from '@/pages/UserManagement'
 const App = () => {
   return (
     <BrowserRouter>
@@ -16,6 +19,9 @@ const App = () => {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="blog/:id" element={<BlogDetail />} />
+          <Route path="CreateBlog" element={<CreateBlog />} />
+          <Route path="MyPostTable" element={<MyPostTable />} />
+          <Route path="UserManagement" element={<UserManagement />} />
         </Route>
           <Route path="login" element={<Login />} />
             <Route path="SignUp" element={<SignUp />} />

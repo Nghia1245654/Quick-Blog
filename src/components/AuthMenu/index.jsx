@@ -24,11 +24,10 @@ import {
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import AuthContext from "@/contexts/authContext";
 
-export default function AuthMenu({  }) {
+export default function AuthMenu({}) {
   const [showNewDialog, setShowNewDialog] = useState(false);
   const [showShareDialog, setShowShareDialog] = useState(false);
-  const {  role, logout } = useContext(AuthContext) || {};
-
+  const { role, logout } = useContext(AuthContext) || {};
 
   const navigate = useNavigate();
   const handleLogout = () => {
@@ -69,14 +68,14 @@ export default function AuthMenu({  }) {
               </svg>
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-40 p-2" align="end">
+          <DropdownMenuContent className="w-50 p-2" align="end">
             <DropdownMenuGroup>
-              {/* dùng toán tử ba ngôi dựa vào role để hiển thị */}
               {role === "user" ? (
+                // ===================== USER =====================
                 <div>
                   <Link
                     className="group flex items-center gap-2 cursor-pointer hover:bg-[#5044e5] hover:text-white rounded py-1.5 px-1.5"
-                    to="/my-posts"
+                    to="/MyPostTable"
                     data-discover="true"
                   >
                     <svg
@@ -100,8 +99,11 @@ export default function AuthMenu({  }) {
                     </svg>
                     My Posts
                   </Link>
-                  <div className="group flex items-center gap-2 cursor-pointer hover:bg-[#5044e5] hover:text-white rounded py-1.5 px-1.5"
-                  onClick={handleLogout}>
+
+                  <div
+                    className="group flex items-center gap-2 cursor-pointer hover:bg-[#5044e5] hover:text-white rounded py-1.5 px-1.5"
+                    onClick={handleLogout}
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -121,7 +123,85 @@ export default function AuthMenu({  }) {
                     Logout
                   </div>
                 </div>
+              ) : role === "admin" ? (
+                // ===================== ADMIN =====================
+                <div>
+                  <Link
+                    className="group flex items-center gap-2 cursor-pointer hover:bg-[#5044e5] hover:text-white rounded py-1.5 px-1.5"
+                    to="/MyPostTable"
+                    data-discover="true"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="tabler-icon tabler-icon-clipboard-list w-4 h-4 text-[#6b7280] group-hover:text-white"
+                    >
+                      <path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2"></path>
+                      <path d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"></path>
+                      <path d="M9 12l.01 0"></path>
+                      <path d="M13 12l2 0"></path>
+                      <path d="M9 16l.01 0"></path>
+                      <path d="M13 16l2 0"></path>
+                    </svg>
+                    My Posts
+                  </Link>
+
+                  <Link
+                    className="group flex items-center gap-2 cursor-pointer hover:bg-[#5044e5] hover:text-white rounded py-1.5 px-1.5"
+                    to="/UserManagement"
+                    data-discover="true"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="tabler-icon tabler-icon-user-scan w-4 h-4 text-[#6b7280] group-hover:text-white"
+                    >
+                      <path d="M10 9a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
+                      <path d="M4 8v-2a2 2 0 0 1 2 -2h2"></path>
+                      <path d="M4 16v2a2 2 0 0 0 2 2h2"></path>
+                      <path d="M16 4h2a2 2 0 0 1 2 2v2"></path>
+                      <path d="M16 20h2a2 2 0 0 0 2 -2v-2"></path>
+                      <path d="M8 16a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2"></path>
+                    </svg>
+                    User Management
+                  </Link>
+
+                  <div onClick={handleLogout} className="group flex items-center gap-2 cursor-pointer hover:bg-[#5044e5] hover:text-white rounded py-1.5 px-1.5">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="tabler-icon tabler-icon-logout w-4 h-4 text-[#6b7280] group-hover:text-white"
+                    >
+                      <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2"></path>
+                      <path d="M9 12h12l-3 -3"></path>
+                      <path d="M18 15l3 -3"></path>
+                    </svg>
+                    Logout
+                  </div>
+                </div>
               ) : (
+             
                 <div>
                   <div>
                     <Link
@@ -149,6 +229,7 @@ export default function AuthMenu({  }) {
                       Login
                     </Link>
                   </div>
+
                   <div>
                     <Link
                       to="/SignUp"

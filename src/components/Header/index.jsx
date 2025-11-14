@@ -3,8 +3,7 @@ import logo from "@/assets/logo-lGLL0Zb0.png";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import AuthMenu from "@/components/AuthMenu";
-
-function Header({ role }) {
+function Header({  }) {
   const [Themes, setThemes] = useState(
     localStorage.getItem("theme") || "light"
   );
@@ -37,7 +36,7 @@ function Header({ role }) {
         <div className="flex justify-end items-center gap-2">
           
           <Link
-            to="/Login"
+            to="/CreateBlog"
             data-discover="true"
             className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all
               disabled:pointer-events-none disabled:opacity-50
