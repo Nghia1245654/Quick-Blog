@@ -8,7 +8,7 @@ import {
   TableCaption,
 } from "@/components/ui/table";
 import React from "react";
-export default function MyPost({}) {
+export default function MyPost({listPost}) {
   const MyPost = [
     {
       title: "ty",
@@ -33,7 +33,7 @@ export default function MyPost({}) {
             </TableHeader>
 
             <TableBody>
-              {MyPost.map((item) => (
+              {listPost.map((item) => (
                 <TableRow key={item.id}>
                   <TableCell className="max-w-[200px] overflow-hidden text-ellipsis whitespace-nowrap">
                     {item.title}

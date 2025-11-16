@@ -14,4 +14,7 @@ export const fetchDetailBlog = async (id) => {
   const response = await apiInstance.get(`/posts/${id}`);
   return response;
 };
-// 
+export const createNewBlog = async (userdata) => {
+  const response = await apiInstance.post('/posts', userdata);
+  return response;
+};
