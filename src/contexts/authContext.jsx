@@ -7,7 +7,9 @@ import { getme } from "@/services/api/user";
 import { signUpUser } from "@/services/api/user";
 const AuthContext = createContext();
 export const AuthContextProvider = ({ children }) => {
-  const [userInfo, setUserInfo] = useState(null);
+  const [userInfo, setUserInfo] = useState(
+    JSON.parse(localStorage.getItem("userInfo")) || {}
+  );
   const [role, setRole] = useState(
     JSON.parse(localStorage.getItem("userInfo"))?.role || []
   );

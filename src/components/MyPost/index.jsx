@@ -7,14 +7,25 @@ import {
   TableRow,
   TableCaption,
 } from "@/components/ui/table";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import React from "react";
-export default function MyPost({listPost}) {
-  const MyPost = [
-    {
-      title: "ty",
-      content: "ádadsadds...",
-    },
-  ];
+import { Spinner } from "@/components/ui/spinner";
+export default function MyPost({listPost,Loading, openDialog, handleViewBlog}) {
+  function decodeHtml(html) {
+  const txt = document.createElement("textarea");
+  txt.innerHTML = html;
+  return txt.value;
+}
+
+// Xóa tất cả thẻ HTML (vd: <h2>, <span>)
+function stripHtmlTags(html) {
+  return html.replace(/<[^>]*>/g, "");
+}
   return (
     <div className="grid gap-6 px-5 mx-auto max-w-7xl my-20 min-h-[60vh]">
       <div className="overflow-auto">
@@ -31,7 +42,11 @@ export default function MyPost({listPost}) {
                 <TableHead>ACTION</TableHead>
               </TableRow>
             </TableHeader>
-
+            {Loading ? (
+              <TableRow className=" fixed flex justify-center items-center top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                  <Spinner />
+              </TableRow>
+            ) : (
             <TableBody>
               {listPost.map((item) => (
                 <TableRow key={item.id}>
@@ -40,14 +55,18 @@ export default function MyPost({listPost}) {
                   </TableCell>
 
                   <TableCell className="max-w-[400px] overflow-hidden text-ellipsis whitespace-nowrap">
-                    {item.content}
+                    {stripHtmlTags(decodeHtml(item.content))}
                   </TableCell>
 
                   <TableCell className="whitespace-nowrap">
                     <div className="flex items-center gap-2 ">
                       {/* VIEW */}
+                       <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
                       <button
-                        class="bg-blue-500 text-white px-2 py-1 rounded-md"
+                        onClick={() => handleViewBlog(item._id ?? item.id)}
+                        className="bg-blue-500 text-white px-2 py-1 rounded-md"
                         data-state="closed"
                         data-slot="tooltip-trigger"
                       >
@@ -72,10 +91,19 @@ export default function MyPost({listPost}) {
                           <rect width="4" height="2" x="10" y="12"></rect>
                         </svg>
                       </button>
-
+                         </TooltipTrigger>
+                          <TooltipContent>
+                            <p>View this Post</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
                       {/* DELETE */}
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
                       <button
-                        class="bg-red-500 text-white px-2 py-1 rounded-md"
+                        onClick={() => openDialog(item._id ?? item.id)}
+                        className="bg-red-500 text-white px-2 py-1 rounded-md"
                         data-state="closed"
                         data-slot="tooltip-trigger"
                       >
@@ -97,11 +125,18 @@ export default function MyPost({listPost}) {
                           <path d="M10 12l4 4m0 -4l-4 4"></path>
                         </svg>
                       </button>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>Delete this Post</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
                     </div>
                   </TableCell>
                 </TableRow>
               ))}
             </TableBody>
+            )}
           </Table>
         </div>
       </div>

@@ -16,10 +16,7 @@ export default function CreateBlog({
   setTitle,
   content,
   setContent,
-  image,
-  setImage,
   Loading,
-
 }) {
   return (
     <div className="grid gap-6 px-5 mx-auto max-w-7xl my-20 min-h-[60vh]">
@@ -44,7 +41,6 @@ export default function CreateBlog({
                   accept="image/*"
                   type="file"
                   className="hidden"
-                  
                 />
               </div>
             </div>
@@ -55,7 +51,7 @@ export default function CreateBlog({
               </label>
               <input
                 id="title"
-                 onChange={(e) => setTitle(e.target.value)}
+                onChange={(e) => setTitle(e.target.value)}
                 placeholder="Enter blog title"
                 className="border-input h-9 w-full rounded-md border px-3 py-1"
               />
@@ -183,20 +179,22 @@ export default function CreateBlog({
                 </span>
               ))}
             </div>
-
             <div className="text-center">
               <button
+                disabled={Loading}
                 type="submit"
-                className="bg-primary text-white px-6 py-2 rounded"
+                className="bg-primary text-white px-6 py-2 rounded disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none"
                 onClick={() => handleCreateBlog()}
               >
+                {" "}
                 {Loading ? (
-                 <div className="flex gap-2 items-center">
-                <Spinner /> Creating...
-              </div>
-            ) : (
-              "Create Blog"
-            )}
+                  <div className="flex gap-2 items-center">
+                    {" "}
+                    <Spinner  /> Creating Blog
+                  </div>
+                ) : (
+                  "Create Blog"
+                )}
               </button>
             </div>
           </div>

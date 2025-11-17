@@ -18,3 +18,8 @@ export const createNewBlog = async (userdata) => {
   const response = await apiInstance.post('/posts', userdata);
   return response;
 };
+// DELETE: xoa blog
+export const deleteBlog = async (id) => {
+  const response = await apiInstance.delete(`/posts/${id}`);
+  return response;
+};
