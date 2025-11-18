@@ -6,7 +6,9 @@ import { useEffect } from "react";
 import AuthContext from "@/contexts/authContext";
 import { useContext } from "react";
 import { deleteBlog } from "@/services/api/blog";
+import { useNavigate } from "react-router-dom";
 const MyPostTable = () => {
+  const navigate = useNavigate();
     const [listPost, setListPost] = useState([]);
     const [error, setError] = useState(null);
     const [Loading, setLoading] = useState(false);
@@ -32,7 +34,7 @@ const MyPostTable = () => {
  const handleViewBlog=async(id)=>{
   try{
     // khi nhấn vào sẽ chuyển sang trang BlogDetail của blog đó
-    window.location.href = `/blog/${id}`;
+    navigate(`/blog/${id}`);
   }catch(err){
     console.error(err);
     setError(err.message);

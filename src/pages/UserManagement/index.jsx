@@ -4,6 +4,7 @@ import { fetchListUser } from '@/services/api/user';
 import { useState } from 'react';
 import { deleteUser } from '@/services/api/user';
 import { DialogDelete } from "@/components/DialogDelete";
+import { DialogRole } from "@/components/DialogRole";
 const UserManagement = () => {
   const [listUser, setListUser] = useState([]);
   const [error, setError] = useState(null);
@@ -13,6 +14,10 @@ const UserManagement = () => {
       const openDialog = (id) => {
         setIdDeleteUser(id);
         setOpen(true);
+      };
+     const[openDialogRole, setOpenDialogRole] = useState(false);
+     const openDialogRoleUser = (id) => {
+        setOpenDialogRole(true);
       };
    const handleDeleteUser=async(id)=>{
     try{
@@ -46,12 +51,17 @@ const UserManagement = () => {
   return (
 
     <div>
-        <UserManagementTable listUser={listUser} loading={loading} openDialog={openDialog} />
+        <UserManagementTable listUser={listUser} loading={loading} openDialog={openDialog} openDialogRoleUser={openDialogRoleUser} />
         <DialogDelete
           open={Open}
           setOpen={setOpen}
           idDelete={idDeleteUser}
           onConfirm={() => handleDeleteUser(idDeleteUser)}
+        />
+        <DialogRole
+          open={openDialogRole}
+          setOpen={setOpenDialogRole}
+          
         />
     </div>
   )

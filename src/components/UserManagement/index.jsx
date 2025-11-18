@@ -16,7 +16,7 @@ import { Badge } from "@/components/ui/badge";
 import React from "react";
 import { Spinner } from "@/components/ui/spinner";
 
-export default function UserManagementTable({ listUser, loading, openDialog }) {
+export default function UserManagementTable({ listUser, loading, openDialog , openDialogRoleUser }) {
   return (
     <div className="grid gap-6 px-5 mx-auto max-w-7xl my-20 min-h-[60vh]">
       <div className="overflow-auto">
@@ -99,7 +99,7 @@ export default function UserManagementTable({ listUser, loading, openDialog }) {
                         <TooltipProvider>
                           <Tooltip>
                             <TooltipTrigger asChild>
-                              <button className="bg-primary/10 text-primary px-2 py-1 rounded-md">
+                              <button onClick={() => openDialogRoleUser(user._id ?? user.id)} className="bg-primary/10 text-primary px-2 py-1 rounded-md">
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"
                                   width="24"
